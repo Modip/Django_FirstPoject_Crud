@@ -6,17 +6,40 @@
 <br>
 <br>
 <div class="container">
-    <div class="form-group">
-        <label for="exampleInputEmail1">Nom</label>
-        <input type="email" class="form-control" name="nom" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="Enter nom">
+    <a type="button" class="btn btn-primary" href="{% url 'employeuradd' %}">
+        Ajouter employeurss
+    </a>
+    <div class="card">
+        <div class="card-header">
+            Details des employes
+        </div class="card-body">
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Action</th>
+                        <th scope="col">Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employeur in employeurs %}
+                    <tr>
+                        <td>{{employeur.id}} </td>
+                        <td>{{employeur.nom}} </td>
+                        <td>{{employeur.email}} </td>
+                        <td><a href="/edit/{{employe.id}}">Editer</a></td>
+                        <td><a href="/deleteEmployeur/{% url 'employeurdelete' %}">Supprimer</a></td>
+                        <td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="form-group" >
-        <label for="exampleInputEmail1">Adresse</label>
-        <input type="email" class="form-control" name="adresse" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="Enter adresse">
-    </div>
-    <button type="button" class="btn btn-primary">Enregister</button>
 </div>
 
 {% endblock %}

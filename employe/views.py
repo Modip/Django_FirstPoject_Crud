@@ -1,26 +1,32 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import EmployeForm
-from .models import Person
+from .models import Employe
 
-# Create your views here.
-def crud(request):
-    return render(request, 'templates/index.html')
-    
-def employe(request):
+def home(request):
+    return HttpResponse('Hello Modio')
+
+def listEmploye(request):
+    employes = Employe.objects.all()
+    return render(request, 'employe/employe.html', {'employes': employes})
+
+def addEmploye(request):
     if request.method == 'POST':
-        data = request.POST
-        prenom = data['prenom']
-        nom = data['nom']
-        email = data['email']
-
-        obj = Person.objects.create(prenom=prenom,nom=nom,email=email)
-        if obj:
-            return redirect('/employe') 
-            return HttpResponse("Erreur lors de l'ajout")    
+        form = EmployeForm(request.POST)
+        if form.is_valid():
+            emp = Employe()
+            emp.nom = form.cleaned_data['prenom']
+            emm.email = form.cleaned_data['nom']
+            obj.email = form.cleaned_data['email']
+            emp.email = form.cleaned_data['fonction']
+            emp.save()
+        redirect("/employelist")            
     else:
-        form = EmployeForm()
-        context = {
-            'form':form
-        } 
-    return render(request,'employe/employe.html',context)    
+        form = EmployeurForm()         
+    return render(request, 'employe/employe.html', {'form':form} ) 
+
+def deleteEmploye(request, id):
+    employe = Employe.objects.get(id=id)
+    employe.delete()
+    return render(request, 'employe/employedelete.html') 
+

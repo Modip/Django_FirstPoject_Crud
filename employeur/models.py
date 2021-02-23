@@ -1,7 +1,7 @@
 from django.db import models
 
-# Create your models here.
-
-class employeur(models.Model):
+class Employeur(models.Model):
     nom = models.CharField(max_length=30)
     email = models.CharField(max_length=30)
+    class Meta:
+        db_table = "employeur"
