@@ -5,6 +5,8 @@ urlpatterns=[
     # path('', views.home),
     path('', views.listEmploye, name='employelist'),
     path('addEmploye', views.addEmploye,name = 'addEmploye'),
-    path('employedelete', views.addEmploye,name = 'employedelete')
+    path('/employedelete/<str:id>/', views.deleteEmploye,name = 'employedelete'),
+    path('/employeedit/<str:id>/', views.editEmploye,name = 'employeedit')
+
 ,
 ]

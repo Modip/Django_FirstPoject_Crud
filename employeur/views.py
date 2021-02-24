@@ -27,6 +27,11 @@ def addEmployeur(request):
         form = EmployeurForm()         
     return render(request, 'employeur/addemployeur.html', {'form':form}) 
 
+def editEmployeur(request, id):
+    Employeur = Employeur.objects.get(id=id)
+    Employeur.delete()
+    return render(request, 'employeur/editemployeur.html', {'form':form}) 
+
 def deleteEmployeur(request, id):
     Employeur = Employeur.objects.get(id=id)
     Employeur.delete()

@@ -31,8 +31,8 @@
                         <td>{{employeur.id}} </td>
                         <td>{{employeur.nom}} </td>
                         <td>{{employeur.email}} </td>
-                        <td><a href="/edit/{{employe.id}}">Editer</a></td>
-                        <td><a href="/deleteEmployeur/{% url 'employeurdelete' %}">Supprimer</a></td>
+                        <td><a class="btn btn-secondary" href="{% url 'editemployeur' employeur.id %}">Editer</a></td>
+                        <td><a class="btn btn-danger" href="{% url 'deleteemployeur' employeur.id %}">Supprimer</a></td>
                         <td>
                     </tr>
                     {% endfor %}
