@@ -2,6 +2,16 @@
 
 {% block contenu %}
 
+
+<br>
+<br>
+<br>
+
 <h2>Supprimer employeur</h2>
+<form action="">
+    {% csrf_token %}
+    <a href="{% url 'employeurlist' %}">Annuler</a>
+    <input type="submit" name="Confirmer">
+</form>
 
 {% endblock %}

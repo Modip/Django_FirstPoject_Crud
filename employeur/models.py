@@ -5,3 +5,6 @@ class Employeur(models.Model):
     email = models.CharField(max_length=30)
     class Meta:
         db_table = "employeur"
+
+    #def __str__(self):
+    #    return self.Meta

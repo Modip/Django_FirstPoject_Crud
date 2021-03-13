@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block contenu %}
+
+<br>
+<br>
+<br>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit" class="btn btn-outline-info">Valider</button>
+</form>
+
+{% endblock %}

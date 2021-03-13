@@ -2,6 +2,17 @@
 
 {% block contenu %}
 
-<h2>Supprimer employe</h2>
+
+<br>
+<br>
+<br>
+
+<p>Voulez-vous Supprimer</p>
+
+<form action="{% url 'deleteemployeur' item.id %}" method="POST">
+    <a class="btn btn-warning" href="{% url 'employelist'}"></a>
+    <input class="btn btn-danger" type="submit" name="Confirmer">
+</form>
+
 
 {% endblock %}

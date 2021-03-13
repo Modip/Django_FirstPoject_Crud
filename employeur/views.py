@@ -22,18 +22,28 @@ def addEmployeur(request):
             obj.nom = form.cleaned_data['nom']
             obj.email = form.cleaned_data['email']
             obj.save()
-        redirect("/employeurlist")            
+        redirect("/employeurlist")
     else:
         form = EmployeurForm()         
     return render(request, 'employeur/addemployeur.html', {'form':form}) 
 
-def editEmployeur(request, id):
-    Employeur = Employeur.objects.get(id=id)
-    Employeur.delete()
-    return render(request, 'employeur/editemployeur.html', {'form':form}) 
+def editEmployeur(request,id):
+    employeur = Employeur.objects.get(id=id)
+    form=EmployeurForm(instance=employeur)
+
+    if request.method == 'POST':
+        form = EmployeurForm(request.POST,instance=employeur)
+        if form.is_valid():
+            form.save()
+        return redirect("/")
+
+    return render(request, 'employeur/editemployeur.html', {'form':form})
 
 def deleteEmployeur(request, id):
-    Employeur = Employeur.objects.get(id=id)
-    Employeur.delete()
-    return render(request, 'employeur/deleteemployeur.html', {'form':form}) 
+    employeur = Employeur.objects.get(id=id)
+    employeur.delete()
+    context = {
+        'form': EmployeurForm()
+    }
+    return render(request, 'employeur/deleteemployeur.html', context)
 

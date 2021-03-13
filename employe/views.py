@@ -14,24 +14,36 @@ def addEmploye(request):
     if request.method == 'POST':
         form = EmployeForm(request.POST)
         if form.is_valid():
-            emp = Employe()
-            emp.nom = form.cleaned_data['prenom']
-            emm.email = form.cleaned_data['nom']
-            obj.email = form.cleaned_data['email']
-            emp.email = form.cleaned_data['fonction']
-            emp.save()
-        redirect("/employelist")            
+            data = form.cleaned_data
+            data.nom = form.cleaned_data['prenom']
+            data.email = form.cleaned_data['nom']
+            data.email = form.cleaned_data['email']
+            data.email = form.cleaned_data['fonction']
+            print(data)
+            data.save()
+        return redirect("/")            
     else:
-        form = EmployeurForm()         
-    return render(request, 'employe/employe.html', {'form':form} ) 
+        form = EmployeForm()
+    return render(request, 'employe/employe.html', {'form':form})
 
 def editEmploye(request, id):
     employe = Employe.objects.get(id=id)
-    employe.delete()
-    return render(request, 'employe/editemploye.html')
+    if request.method == 'POST':
+        form = EmployeForm(request.POST, instance=employe)
+        if form.is_valid():
+            form.save()
+        return redirect("/")
+    context = {
+        'employe': EmployeForm()
+    }
+    return render(request, 'employe/editemploye.html', context)
 
 def deleteEmploye(request, id):
     employe = Employe.objects.get(id=id)
-    employe.delete()
-    return render(request, 'employe/deleteemploye.html') 
-
+    if request.method == 'POST':
+        employe.delete()
+        return redirect("/")
+    context = {
+        'employe': employe
+    }
+    return render(request, 'employe/deleteemploye.html', context)

@@ -1,18 +1,14 @@
 {% extends 'index.html' %}
 
 {% block contenu %}
-
-<br>
-<br>
-<br>
 <div class="container">
     <a type="button" class="btn btn-primary" href="{% url 'employeuradd' %}">
-        Ajouter employeurss
+        Ajouter employeurs
     </a>
     <div class="card">
         <div class="card-header">
             Details des employes
-        </div class="card-body">
+        </div>
         <div>
             <table class="table">
                 <thead class="thead-dark">
@@ -22,7 +18,6 @@
                         <th scope="col">Email</th>
                         <th scope="col">Action</th>
                         <th scope="col">Action</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -31,9 +26,12 @@
                         <td>{{employeur.id}} </td>
                         <td>{{employeur.nom}} </td>
                         <td>{{employeur.email}} </td>
-                        <td><a class="btn btn-secondary" href="{% url 'editemployeur' employeur.id %}">Editer</a></td>
-                        <td><a class="btn btn-danger" href="{% url 'deleteemployeur' employeur.id %}">Supprimer</a></td>
                         <td>
+                            <a class="btn btn-secondary" href="{% url 'editemployeur' employeur.id %}">Editer</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" href="{% url 'deleteemployeur' employeur.id %}">Supprimer</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block contenu %}
+
+
+<br>
+<br>
+<br>
+
+<h2>Editer employe</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="">Prenom</label>
+    <input type="text" name="prenom" value="{{form.prenom}}">
+
+    <label for="">Nom</label>
+    <input type="text" name="nom" value="{{form.nom}}">
+
+    <label for="">Email</label>
+    <input type="text" name="email" value="{{form.email}}">
+
+    <label for="">Fonction</label>
+    <input type="text" name="fonction" value="{{form.fonction}}">
+
+    <input type="submit" name="Valider">
+    
+</form>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block contenu %}
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-outline-info">Se connecter</button>
+    </form>
+</div>
+
+
+{% endblock %}
