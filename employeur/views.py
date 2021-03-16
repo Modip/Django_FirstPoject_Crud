@@ -28,14 +28,13 @@ def addEmployeur(request):
     return render(request, 'employeur/addemployeur.html', {'form':form}) 
 
 def editEmployeur(request,id):
-    employeur = Employeur.objects.get(id=id)
+    employeur=Employeur.objects.get(id=id)
     form=EmployeurForm(instance=employeur)
-
     if request.method == 'POST':
         form = EmployeurForm(request.POST,instance=employeur)
         if form.is_valid():
             form.save()
-        return redirect("/")
+        return redirect("/employeur")
 
     return render(request, 'employeur/editemployeur.html', {'form':form})
 

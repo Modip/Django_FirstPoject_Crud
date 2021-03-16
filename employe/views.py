@@ -28,6 +28,7 @@ def addEmploye(request):
 
 def editEmploye(request, id):
     employe = Employe.objects.get(id=id)
+    form = EmployeForm(instance=employe)
     if request.method == 'POST':
         form = EmployeForm(request.POST, instance=employe)
         if form.is_valid():

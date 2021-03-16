@@ -26,7 +26,6 @@ urlpatterns = [
     path('employeur/',include('employeur.urls')),
     path('login/', login_view),
     path('logout/', logout_view),
-    path('register/',include('accounts.urls')),
-    path('accounts/', LoginUser)
+    path('accounts/',include('accounts.urls')),
 
 ]

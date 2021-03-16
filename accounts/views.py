@@ -1,33 +1,35 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
-from .forms import LoginForm
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
+from .forms import CreateUser
 
 # Create your views here.
 
-def LoginUser(request):
+def loginUser(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            user = authenticate(request, username=data['username'], password=data['password'])
-        print(user)
-    form = LoginForm()
+        username=request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('employelist')
+        else:
+            messages.info(request, "Utilisateur et/ou mot de passe invalide")
     context = {
-        'form': form
+
     }
-    return render(request, 'login/login.html', context)
+    return render(request, 'accounts/login.html', context)
 
 def registerUser(request):
+    form = CreateUser()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CreateUser(request.POST)
         if form.is_valid():
-            data = form.cleaned_data
-            user = User.objects.create(username=data['username'], password=data['password1'])
-            user.save()
-            return redirect('/')
-    form = UserCreationForm()
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.succes(request, 'Compte creer avec success '+user)
+            return redirect('login')
     context = {
         'form':form
     }

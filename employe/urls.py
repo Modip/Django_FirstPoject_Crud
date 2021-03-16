@@ -1,10 +1,9 @@
-from django.urls import path,include
+from django.urls import path
 from employe import views
 
 urlpatterns = [
-    # path('', views.home),
     path('', views.listEmploye, name='employelist'),
     path('addEmploye', views.addEmploye, name = 'addEmploye'),
-    path('employedelete/<str:id>/', views.deleteEmploye, name = 'employedelete'),
-    path('employeedit/<str:id>/', views.editEmploye, name = 'employeedit')
+    path('deleteemploye/<str:id>/', views.deleteEmploye, name ='deleteemploye'),
+    path('editemploye/<str:id>/', views.editEmploye, name = 'editemploye')
 ]
