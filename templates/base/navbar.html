@@ -19,7 +19,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="{% url 'register' %}">Setting</a>
+            <a class="nav-link dropdown-toggle" href="{% url 'logout' %}">Deconnexion</a>
           <div class="dropdown-menu">
             {% if user.is_authenticated %}
             <a class="dropdown-idem" href="/register">Logout</a>

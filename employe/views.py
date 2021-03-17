@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from .forms import EmployeForm
 from .models import Employe
 
 def home(request):
     return HttpResponse('Hello Modio')
-
+@login_required(login_url='login')
 def listEmploye(request):
     employes = Employe.objects.all()
     return render(request, 'employe/employe.html', {'employes': employes})
@@ -19,7 +20,6 @@ def addEmploye(request):
             data.email = form.cleaned_data['nom']
             data.email = form.cleaned_data['email']
             data.email = form.cleaned_data['fonction']
-            print(data)
             data.save()
         return redirect("/")            
     else:
@@ -28,7 +28,7 @@ def addEmploye(request):
 
 def editEmploye(request, id):
     employe = Employe.objects.get(id=id)
-    form = EmployeForm(instance=employe)
+    form=EmployeForm(instance=employe)
     if request.method == 'POST':
         form = EmployeForm(request.POST, instance=employe)
         if form.is_valid():
