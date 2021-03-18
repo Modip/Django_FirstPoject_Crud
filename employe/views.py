@@ -15,16 +15,11 @@ def addEmploye(request):
     if request.method == 'POST':
         form = EmployeForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data
-            data.nom = form.cleaned_data['prenom']
-            data.email = form.cleaned_data['nom']
-            data.email = form.cleaned_data['email']
-            data.email = form.cleaned_data['fonction']
-            data.save()
+            form.save()
         return redirect("/")            
     else:
         form = EmployeForm()
-    return render(request, 'employe/employe.html', {'form':form})
+    return render(request, 'employe/addemploye.html', {'form':form})
 
 def editEmploye(request, id):
     employe = Employe.objects.get(id=id)
@@ -41,10 +36,9 @@ def editEmploye(request, id):
 
 def deleteEmploye(request, id):
     employe = Employe.objects.get(id=id)
-    if request.method == 'POST':
-        employe.delete()
-        return redirect("/")
+    employe.delete()
+    return redirect("/")
     context = {
-        'employe': employe
+        'employe': employeForm()
     }
     return render(request, 'employe/deleteemploye.html', context)

@@ -22,7 +22,7 @@ def addEmployeur(request):
             obj.nom = form.cleaned_data['nom']
             obj.email = form.cleaned_data['email']
             obj.save()
-        redirect("/employeurlist")
+        return redirect("/employeur")
     else:
         form = EmployeurForm()         
     return render(request, 'employeur/addemployeur.html', {'form':form}) 
